@@ -35,18 +35,18 @@ fun determineRucksackPriority(rucksack: String): Int {
 }
 
 fun determineElveGroupPriority(group: List<String>): Int {
-    val commonItems = group.get(0).toCharArray()
-        .filter { group.get(1).toCharArray().contains(it) }
-        .filter { group.get(2).toCharArray().contains(it) }
+    val commonItems = group[0].toCharArray()
+        .filter { group[1].toCharArray().contains(it) }
+        .filter { group[2].toCharArray().contains(it) }
         .distinct()
 
     return getContentPriority(commonItems[0])
 }
 
 fun getContentPriority(content: Char): Int {
-    if (content in 'a'..'z') {
-        return content.code - 96
+    return if (content in 'a'..'z') {
+        content.code - 96
     } else {
-        return content.code - 64 + 26
+        content.code - 64 + 26
     }
 }

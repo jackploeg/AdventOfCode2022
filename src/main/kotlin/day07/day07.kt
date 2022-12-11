@@ -21,7 +21,7 @@ fun dirSizeForEnoughFreeSpace(totalSize: Int, neededFree: Int, fileName: String)
     val tree = readTree(input)
     val freeSpace = totalSize - tree.getSize()
     val needed = neededFree - freeSpace
-    return tree.flattened().filter { it.getSize() >= needed }.sortedBy { it.getSize() }.first().getSize()
+    return tree.flattened().filter { it.getSize() >= needed }.minByOrNull { it.getSize() }!!.getSize()
 }
 
 fun readTree(lines: List<String>): Directory {
@@ -42,10 +42,10 @@ fun readTree(lines: List<String>): Directory {
                         currentDir = currentDir.parent!!
                     }
                 } else {
-                    currentDir = currentDir.children.filter { it.name == commandLine[1] }.first() as Directory
+                    currentDir = currentDir.children.first { it.name == commandLine[1] } as Directory
                 }
             } else if (commandLine[0] == "ls") {
-
+                // do nothing
             }
         } else {
             val entry = line.split(" ")
@@ -68,12 +68,12 @@ class File(name: String, parent: Directory, val size: Int) : Node(name, parent)
 
 class Directory(name: String, parent: Directory?, val children: MutableSet<Node>) : Node(name, parent) {
     companion object {
-        fun create(name: String, parent: Directory?) = Directory(name, parent, HashSet<Node>())
+        fun create(name: String, parent: Directory?) = Directory(name, parent, HashSet())
     }
 
     fun getSize(): Int {
-        return children.filter { it is File }.map { (it as File).size }.sum() + children.filter { it is Directory }
-            .map { (it as Directory).getSize() }.sum()
+        return children.filterIsInstance<File>().sumOf { it.size } + children.filterIsInstance<Directory>()
+            .sumOf { it.getSize() }
     }
 
     fun flattened(): List<Directory> {
@@ -82,9 +82,9 @@ class Directory(name: String, parent: Directory?, val children: MutableSet<Node>
         return allRoles
     }
 
-    fun flattenedTo(destination: MutableCollection<Directory>) {
+    private fun flattenedTo(destination: MutableCollection<Directory>) {
         destination.add(this)
-        children.filter { it is Directory }?.forEach { (it as Directory).flattenedTo(destination) }
+        children.filterIsInstance<Directory>().forEach { it.flattenedTo(destination) }
     }
 }
 

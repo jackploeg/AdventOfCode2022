@@ -15,11 +15,11 @@ fun findmarker(markersize: Int, fileName: String) {
         val marker: ArrayDeque<Char> = ArrayDeque(markersize)
         val lineChars = line.toCharArray()
         for (i in 1..markersize) {
-            marker.add(lineChars.get(i-1))
+            marker.add(lineChars[i-1])
         }
         var markerEnd = markersize
         while (!allCharsDiffer(marker)) {
-            val c = lineChars.get(markerEnd)
+            val c = lineChars[markerEnd]
             marker.removeFirst()
             marker.add(c)
             markerEnd++

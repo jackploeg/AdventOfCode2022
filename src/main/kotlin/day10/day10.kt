@@ -18,15 +18,14 @@ fun runProgram(fileName: String): Long {
 
 fun processCommand(commandline: String, runner: Runner) {
     val instructions = commandline.split(" ")
-    val command = instructions.get(0)
-    when (command) {
+    when (instructions[0]) {
         "noop" -> runner.tick()
-        "addx" -> runner.addx(Integer.parseInt(instructions.get(1)))
+        "addx" -> runner.addx(Integer.parseInt(instructions[1]))
     }
 }
 
-class Runner(val reporter: Reporter) {
-    var tick = 0
+class Runner(private val reporter: Reporter) {
+    private var tick = 0
     var x = 1
 
     fun tick(ticks: Int = 1) {
@@ -42,8 +41,8 @@ class Runner(val reporter: Reporter) {
     }
 }
 
-class Reporter() {
-    val reportTicks: ArrayList<Int> = arrayListOf(20, 60, 100, 140, 180, 220)
+class Reporter {
+    private val reportTicks: ArrayList<Int> = arrayListOf(20, 60, 100, 140, 180, 220)
     var sumOfX = 0L
 
     fun report(tick: Int, x: Int) {

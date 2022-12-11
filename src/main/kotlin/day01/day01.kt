@@ -24,7 +24,7 @@ fun readElfLoads(fileName: String): List<Int> {
 
     var currentLoad = 0
     for (load in loads) {
-        if (load.equals("")) {
+        if (load == "") {
             loadSums.add(loadSums.size, currentLoad)
             currentLoad = 0
         } else {

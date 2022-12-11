@@ -30,15 +30,15 @@ fun visitedCells(numberOfKnots: Int, fileName: String): Int {
 fun move(line: String, knots: ArrayList<Knot>) {
     val direction = line.substring(0, 1)
     val steps = Integer.parseInt(line.substring(2))
-    for (step in 0..steps - 1) {
+    for (step in 0 until steps) {
         var pos = knots.first().move(direction)
-        for (i in 1 .. knots.size-1) {
+        for (i in 1 until knots.size) {
             pos = knots[i].follow(pos)
         }
     }
 }
 
-class Knot(var position: Cell, val visitedCells: MutableSet<Cell> = mutableSetOf(position)) {
+class Knot(private var position: Cell, val visitedCells: MutableSet<Cell> = mutableSetOf(position)) {
     fun move(direction: String): Cell {
         when (direction) {
             "U" -> position = Cell(position.x, position.y + 1)

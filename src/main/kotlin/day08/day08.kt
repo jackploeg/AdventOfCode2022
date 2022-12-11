@@ -19,12 +19,11 @@ fun visibleTrees(fileName: String): Int {
 fun maxSenicScore(fileName: String): Int {
     val input = readStringFile(fileName)
     val grid = initTreeGrid(input)
-    return grid.first.flatMap { it.trees }.map { it.scenicScore() }.max()
+    return grid.first.flatMap { it.trees }.maxOfOrNull { it.scenicScore() }!!
 }
 
 fun countVisibleTrees(rows: ArrayList<Row>): Int {
-    val visibleTrees = rows.flatMap { it.trees }.filter { it.isVisible() }.count()
-    return visibleTrees
+    return rows.flatMap { it.trees }.filter { it.isVisible() }.count()
 }
 
 fun initTreeGrid(lines: List<String>): Pair<ArrayList<Row>, ArrayList<Column>> {
@@ -37,16 +36,16 @@ fun initTreeGrid(lines: List<String>): Pair<ArrayList<Row>, ArrayList<Column>> {
         if (i <= rows.size) {
             rows.add(Row(i))
         }
-        val row = rows.get(i)
+        val row = rows[i]
 
         var j = 0
         do {
             if (j <= columns.size) {
                 columns.add(Column(j))
             }
-            val column = columns.get(j)
+            val column = columns[j]
 
-            val tree = Tree(row, i, column, j, lines[i].get(j).digitToInt())
+            val tree = Tree(row, i, column, j, lines[i][j].digitToInt())
             row.trees.add(tree)
             column.trees.add(tree)
             j++
@@ -60,7 +59,7 @@ fun initTreeGrid(lines: List<String>): Pair<ArrayList<Row>, ArrayList<Column>> {
 class Row(val number: Int, val trees: ArrayList<Tree> = ArrayList())
 class Column(val number: Int, val trees: ArrayList<Tree> = ArrayList())
 
-class Tree(val row: Row, val rowIndex: Int, val column: Column, val columnIndex: Int, val height: Int) {
+class Tree(private val row: Row, private val rowIndex: Int, private val column: Column, private val columnIndex: Int, private val height: Int) {
     fun isVisible(): Boolean {
         return rowIndex == 0
                 || rowIndex == row.trees.size - 1
@@ -77,8 +76,8 @@ class Tree(val row: Row, val rowIndex: Int, val column: Column, val columnIndex:
     private fun allSmaller(collection: ArrayList<Tree>, index: Int): Boolean {
         val before = collection.subList(0, index)
         val after = collection.subList(index + 1, collection.size)
-        return !(before.map { it.height }.filter { it >= this.height }.size > 0)
-                || !(after.map { it.height }.filter { it >= this.height }.size > 0)
+        return before.map { it.height }.filter { it >= this.height }.isEmpty()
+                || after.map { it.height }.filter { it >= this.height }.isEmpty()
     }
 
     private fun scenicScore(collection: ArrayList<Tree>, index: Int): Int {
@@ -95,7 +94,7 @@ class Tree(val row: Row, val rowIndex: Int, val column: Column, val columnIndex:
 
         var score2 = 0
         if (index < collection.size) {
-            for (i in index + 1..collection.size - 1) {
+            for (i in index + 1 until collection.size) {
                 score2++
                 if (collection[i].height >= height)
                     break

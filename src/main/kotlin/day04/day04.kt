@@ -14,20 +14,20 @@ fun main() {
 fun getNumberOfContainments(fileName: String): Int {
     val assignmentPairs: List<Pair<IntRange, IntRange>> = readStringFile(fileName)
         .map { toRangePair(it) }
-    return assignmentPairs.filter { rangesContained(it) }.count()
+    return assignmentPairs.count { rangesContained(it) }
 }
 
 fun getNumberOfOverlaps(fileName: String): Int {
     val assignmentPairs: List<Pair<IntRange, IntRange>> = readStringFile(fileName)
         .map { toRangePair(it) }
-    return assignmentPairs.filter { rangesOverlap(it) }.count()
+    return assignmentPairs.count { rangesOverlap(it) }
 }
 
 fun toRangePair(input: String): Pair<IntRange, IntRange> {
     val ranges = input.split(",")
-    val (start1, end1) = ranges.get(0).split("-")
+    val (start1, end1) = ranges[0].split("-")
     val range1 = start1.toInt().rangeTo(end1.toInt())
-    val (start2, end2) = ranges.get(1).split("-")
+    val (start2, end2) = ranges[1].split("-")
     val range2 = start2.toInt().rangeTo(end2.toInt())
     return Pair(range1, range2)
 }

@@ -33,12 +33,12 @@ fun initStacks(input: List<String>): ArrayList<ArrayDeque<Char>> {
         val crates = line.chunked(4)
         var stackIndex = 1
         for (crate in crates) {
-            val content = crate.toCharArray().get(1)
+            val content = crate.toCharArray()[1]
             if (stackIndex > stacks.size) {
-                stacks.add(ArrayDeque<Char>())
+                stacks.add(ArrayDeque())
             }
             if (content != ' ') {
-                stacks.get(stackIndex - 1).add(content)
+                stacks[stackIndex - 1].add(content)
             }
             stackIndex++
         }
