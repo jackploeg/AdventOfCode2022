@@ -1,6 +1,6 @@
 package day03
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
     println(getSumOfPriorities("src/main/kotlin/day03/test.txt"))

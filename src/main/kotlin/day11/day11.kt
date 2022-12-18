@@ -1,7 +1,7 @@
 package day11
 
 
-import utitlities.readStringFile
+import utilities.readStringFile
 import java.math.BigInteger
 
 fun main() {

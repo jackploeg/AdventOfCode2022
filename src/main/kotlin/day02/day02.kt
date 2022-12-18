@@ -1,6 +1,6 @@
 package day02
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
     println(getScore1("src/main/kotlin/day02/test.txt"))

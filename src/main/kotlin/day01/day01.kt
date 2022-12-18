@@ -1,6 +1,6 @@
 package day01
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
     println(getMaxLoad("src/main/kotlin/day01/test.txt"))

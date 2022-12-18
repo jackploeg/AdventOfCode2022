@@ -1,6 +1,6 @@
 package day07
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
     println(dirsLessOrEqual(100000, "src/main/kotlin/day07/test.txt"))

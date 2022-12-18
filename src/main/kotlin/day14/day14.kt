@@ -1,6 +1,6 @@
 package day14
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
 

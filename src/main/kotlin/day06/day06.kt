@@ -1,6 +1,6 @@
 package day06
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
     findmarker(4, "src/main/kotlin/day06/test.txt")

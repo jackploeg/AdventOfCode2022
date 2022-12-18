@@ -1,6 +1,6 @@
 package day13
 
-import utitlities.readStringFile
+import utilities.readStringFile
 import java.lang.Math.min
 
 

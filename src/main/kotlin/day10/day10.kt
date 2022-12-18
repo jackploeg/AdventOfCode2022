@@ -1,6 +1,6 @@
 package day10
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
     println(runProgram("src/main/kotlin/day10/test.txt"))

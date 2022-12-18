@@ -1,6 +1,6 @@
 package day05
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
     println(readTopCrateLetters9000("src/main/kotlin/day05/test.txt"))

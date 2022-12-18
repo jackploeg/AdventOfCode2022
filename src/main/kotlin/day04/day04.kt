@@ -1,6 +1,6 @@
 package day04
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
     println(getNumberOfContainments("src/main/kotlin/day04/test.txt"))

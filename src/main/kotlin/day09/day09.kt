@@ -1,6 +1,6 @@
 package day09
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
     println(visitedCells(2,"src/main/kotlin/day09/test.txt"))

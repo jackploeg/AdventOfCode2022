@@ -1,6 +1,6 @@
 package day08
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
     println(visibleTrees("src/main/kotlin/day08/test.txt"))

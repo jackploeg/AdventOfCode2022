@@ -1,6 +1,6 @@
 package day12
 
-import utitlities.readStringFile
+import utilities.readStringFile
 
 fun main() {
     println(shortestPath("src/main/kotlin/day12/test.txt"))
